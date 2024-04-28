@@ -1,37 +1,22 @@
 #include<stdio.h>
 
-int getIndex(int arr[],int size,int element){
-    for(int i = 0;i<size;i++){
-        if(arr[i]==element){
-            return i+1;
-        }
-    }
-    return -1;
-}
-
-
 int main(){
     int processes;
     printf("Enter the number of processes : ");
     scanf("%d",&processes);
 
-    int burstTimes[processes],arrivalTimes[processes];
-    int tempB,tempA;
+    int burstTimes[processes],arrivalTimes[processes],ganttProcess[processes];
+    int tempB,tempA,sortTemp;
 
     printf("\nEnter the burst times and arrival times of the processes \n");
     for(int i = 0; i<processes; i++){
-        printf("Burst time and arrival time of process %d : ",i+1);
+        ganttProcess[i] = i;
+        printf("Burst time and arrival time of process %d : ",i);
         scanf("%d%d",&tempB,&tempA);
         burstTimes[i] = tempB;  
         arrivalTimes[i] = tempA;
     }
 
-    int copyBurst[processes];
-    for(int i = 0;i<processes;i++){
-        copyBurst[i] = burstTimes[i];
-    }
-
-    int sortTemp;
     for(int i = 0; i<processes;i++){
         for(int j = 0;j<processes-i-1;j++){
             if(arrivalTimes[j] > arrivalTimes[j+1]){
@@ -41,11 +26,14 @@ int main(){
                 sortTemp = burstTimes[j];
                 burstTimes[j] = burstTimes[j+1];
                 burstTimes[j+1] = sortTemp;
+                sortTemp = ganttProcess[j];
+                ganttProcess[j] = ganttProcess[j+1];
+                ganttProcess[j+1] = sortTemp;
             }
         }
     }
 
-    int turnAroundTime[processes],waitingTime[processes];
+    int turnAroundTime[processes],waitingTime[processes],completionTime[processes];
     int cumulativeTime = 0;
 
     printf("\nGantt Chart for FCFS scheduling is : \n");
@@ -55,10 +43,8 @@ int main(){
     }
     printf("\n");
     printf("|");
-    int tempIndex = 0;
     for(int i = 0;i<processes;i++){
-        tempIndex = getIndex(copyBurst,processes,burstTimes[i]);
-        printf("\tP%d\t|",tempIndex);
+        printf("\tP%d\t|",ganttProcess[i]);
     }
     printf("\n");
     for(int i = 0;i<processes*2;i++){
@@ -66,14 +52,21 @@ int main(){
     }
     printf("\n");
     printf("0\t\t");
+
     for(int i = 0;i<processes;i++){
         cumulativeTime += burstTimes[i];
+        completionTime[i] = cumulativeTime;
         printf("%d\t\t",cumulativeTime);
         turnAroundTime[i]  = cumulativeTime-arrivalTimes[i];
         waitingTime[i] = turnAroundTime[i]-burstTimes[i];
     }
-    printf("\n");
+    printf("\n\n");
 
+    for(int i = 0;i<processes;i++){
+        printf("CT for P%d = %d\nTAT for P%d = %d\nWT for P%d = %d\n",i+1,completionTime[i],i+1,turnAroundTime[i],i+1,waitingTime[i]);
+        printf("\n");
+    }
+    
     int sumTAT = 0,sumWT = 0;
 
     for(int i = 0;i<processes;i++){
@@ -81,8 +74,7 @@ int main(){
         sumWT += waitingTime[i];
     }
 
-    printf("\nAverage Turn Around Time for the processes is : %d\n",sumTAT/processes);
+    printf("Average Turn Around Time for the processes is : %d\n",sumTAT/processes);
     printf("Average Waiting Time for the processes is : %d\n",sumWT/processes);
-
 
 }
