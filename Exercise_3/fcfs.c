@@ -29,11 +29,13 @@ int main(){
                 sortTemp = ganttProcess[j];
                 ganttProcess[j] = ganttProcess[j+1];
                 ganttProcess[j+1] = sortTemp;
+
             }
         }
     }
 
-    int turnAroundTime[processes],waitingTime[processes],completionTime[processes];
+    int turnAroundTime[processes],waitingTime[processes];
+    // int completionTime[processes];
     int cumulativeTime = 0;
 
     printf("\nGantt Chart for FCFS scheduling is : \n");
@@ -55,17 +57,17 @@ int main(){
 
     for(int i = 0;i<processes;i++){
         cumulativeTime += burstTimes[i];
-        completionTime[i] = cumulativeTime;
+        // completionTime[i] = cumulativeTime;
         printf("%d\t\t",cumulativeTime);
         turnAroundTime[i]  = cumulativeTime-arrivalTimes[i];
         waitingTime[i] = turnAroundTime[i]-burstTimes[i];
     }
     printf("\n\n");
 
-    for(int i = 0;i<processes;i++){
-        printf("CT for P%d = %d\nTAT for P%d = %d\nWT for P%d = %d\n",i+1,completionTime[i],i+1,turnAroundTime[i],i+1,waitingTime[i]);
-        printf("\n");
-    }
+    // for(int i = 0;i<processes;i++){
+    //     printf("CT for P%d = %d\nTAT for P%d = %d\nWT for P%d = %d\n",i+1,completionTime[i],i+1,turnAroundTime[i],i+1,waitingTime[i]);
+    //     printf("\n");
+    // }
     
     int sumTAT = 0,sumWT = 0;
 
