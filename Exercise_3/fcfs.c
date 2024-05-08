@@ -34,7 +34,7 @@ int main(){
         }
     }
 
-    int turnAroundTime[processes],waitingTime[processes];
+    int turnAroundTime[processes],waitTime[processes];
     // int completionTime[processes];
     int cumulativeTime = 0;
 
@@ -60,7 +60,7 @@ int main(){
         // completionTime[i] = cumulativeTime;
         printf("%d\t\t",cumulativeTime);
         turnAroundTime[i]  = cumulativeTime-arrivalTimes[i];
-        waitingTime[i] = turnAroundTime[i]-burstTimes[i];
+        waitTime[i] = turnAroundTime[i]-burstTimes[i];
     }
     printf("\n\n");
 
@@ -73,10 +73,10 @@ int main(){
 
     for(int i = 0;i<processes;i++){
         sumTAT += turnAroundTime[i];
-        sumWT += waitingTime[i];
+        sumWT += waitTime[i];
     }
 
     printf("Average Turn Around Time for the processes is : %d\n",sumTAT/processes);
     printf("Average Waiting Time for the processes is : %d\n",sumWT/processes);
-
+    return 0;
 }
