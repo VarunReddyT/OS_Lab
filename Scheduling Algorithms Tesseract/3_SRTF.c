@@ -16,25 +16,24 @@ Here are some examples of calls received by the EMDC one morning:
 
 int main() {
 
-    int processes = 5;
+    int n = 5;
     int processNames[] = {1, 2, 3, 4, 5};
     int burstTime[] = {7, 5, 3, 20, 10};
     int remainingTime[] = {7, 5, 3, 20, 10};
     int arrivalTime[] = {480, 481, 482, 495, 500};
 
-    int WT[processes], TAT[processes], completionTime[processes];
+    int WT[n], TAT[n], completionTime[n];
     float totalWT = 0, totalTAT = 0;
 
-    int currentTime = 0;
-    int completedTasks = 0;
+    int currentTime = 0,completedTasks = 0;
     int isCompleted[] = {0,0,0,0,0};
 
 
-    while (completedTasks < processes) {
+    while (completedTasks < n) {
         int shortestProcess = -1;
         int shortestTime = 99999;
 
-        for (int i = 0; i < processes; i++) {
+        for (int i = 0; i < n; i++) {
             if (isCompleted[i] == 0 && arrivalTime[i] <= currentTime && remainingTime[i] < shortestTime) {
                 shortestTime = remainingTime[i];
                 shortestProcess = i;
@@ -57,13 +56,13 @@ int main() {
     }
 
 
-    printf("Process\tBurst Time\tArrival Time\tCompletion Time\tTurnaround Time\tWaiting Time\n");
-    for (int i = 0; i < processes; i++) {
-        printf("%d\t%d\t\t%d\t\t%d\t\t%d\t\t%d\n", processNames[i], burstTime[i], arrivalTime[i], completionTime[i],TAT[i], WT[i]);
+    printf("Process\tBurst Time\tArrival Time\tCT\tTAT\tWT\n");
+    for (int i = 0; i < n; i++) {
+        printf("%d\t%d\t\t%d\t\t%d\t%d\t%d\n", processNames[i], burstTime[i], arrivalTime[i], completionTime[i],TAT[i], WT[i]);
     }
 
-    printf("Average Turnaround Time: %.2f\n", totalTAT / processes);
-    printf("Average Waiting Time: %.2f\n", totalWT / processes);
+    printf("Average Turnaround Time: %.2f mins\n", totalTAT / n);
+    printf("Average Waiting Time: %.2f mins\n", totalWT / n);
 
     return 0;
 }
