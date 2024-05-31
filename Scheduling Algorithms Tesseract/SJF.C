@@ -24,22 +24,18 @@ Average turnaroundtime: 6.250000*/
 #include<stdio.h>
 
 int main(){
-    int processess;
+    int n;
     printf("Enter the number of process:");
-    scanf("%d",&processess);
-    int processName[processess],arrivalTime[processess],burstTime[processess];
-    int tempP,tempA,tempB;
-    for(int i = 0;i<processess;i++){
+    scanf("%d",&n);
+    int processName[n],arrivalTime[n],burstTime[n];
+    int temp;
+    for(int i = 0;i<n;i++){
         printf("Enter process name, arrival time& burst time:");
-        scanf("%d %d %d",&tempP,&tempA,&tempB);
-        processName[i] = tempP;
-        arrivalTime[i] = tempA;
-        burstTime[i] = tempB;
+        scanf("%d %d %d",&processName[i],&arrivalTime[i],&burstTime[i]);
     }
     printf("\n");
-    int temp;
-    for(int i = 0;i<processess;i++){
-        for(int j = 0;j<processess-i-1;j++){
+    for(int i = 0;i<n;i++){
+        for(int j = 0;j<n-i-1;j++){
             if((arrivalTime[j] > arrivalTime[j+1]) || arrivalTime[j] == arrivalTime[j+1] && burstTime[j] > burstTime[j+1]){
                 temp = arrivalTime[j];
                 arrivalTime[j] = arrivalTime[j+1];
@@ -53,23 +49,21 @@ int main(){
             }
         }
     }
-    int completionTime[processess],waitingTime[processess];
-    int tat[processess],wt[processess];
+    int completionTime[n],waitingTime[n],TAT[n],WT[n];
     int cumulativeSum = 1;
-    float totalTat = 0;
-    float totalWt = 0;
-    printf("ProcessName arrivaltime bursttime  waitingtime turnaroundtime\n");
-    for(int i = 0;i<processess;i++){
+    float totalTat = 0, totalWt = 0;
+    printf("ProcessName Arrivaltime Bursttime  WaitingTime TurnaroundTime\n");
+    for(int i = 0;i<n;i++){
         cumulativeSum += burstTime[i];
         completionTime[i] = cumulativeSum;
-        tat[i] = completionTime[i] - arrivalTime[i];
-        wt[i] = tat[i] - burstTime[i];
-        totalTat += tat[i];
-        totalWt += wt[i];
-        printf("%d\t   %d\t\t%d\t\t%d\t\t%d\n",processName[i],arrivalTime[i],burstTime[i],wt[i],tat[i]);
+        TAT[i] = completionTime[i] - arrivalTime[i];
+        WT[i] = TAT[i] - burstTime[i];
+        totalTat += TAT[i];
+        totalWt += WT[i];
+        printf("%d\t   %d\t\t%d\t\t%d\t\t%d\n",processName[i],arrivalTime[i],burstTime[i],WT[i],TAT[i]);
     }
-    printf("Average waiting time: %f\n",totalWt/processess);
-    printf("Average turnaroundtime: %f\n",totalTat/processess);
+    printf("Average waiting time: %f\n",totalWt/n);
+    printf("Average turnaroundtime: %f\n",totalTat/n);
     
     return 0;
 }
