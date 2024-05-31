@@ -1,3 +1,15 @@
+/* 6.A local library system incorporates several branches, each equipped with computers used for catalog searches, digital archives access, and various educational programs. During the peak hours of library operation, patrons often need to use computers for tasks like research, document processing, or accessing public records. The library staff sets up a system where each user is allotted a 2-minute slot. If a user’s task is not completed within this period, they go back to the end of the queue for another turn. identify the scheduling algorithm.
+Process Id	Arrival time	Burst time
+P1             	0	        5
+P2          	1	            3
+P3	            2	            1
+P4	            3           	2
+P5          	4           	3*/
+
+//Identify the type of CPU scheduling algorithm for the scenario and implement the same in C Language. Calculate Average Turn Around time and Average Waiting time for each of the scheduling algorithm by taking arrival times accordingly.
+//Calculate the times by using gantt chart in observation and crosscheck the same with the output of the program.
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
