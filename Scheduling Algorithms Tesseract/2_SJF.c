@@ -11,32 +11,30 @@ Here are some example tasks that the server might receive on a typical day:
 
 #include<stdio.h>
 
-int hrToMin(char * arrT){
-    int hours = (arrT[0] - '0')*10 + arrT[1] - '0';
-    int minutes = (arrT[3] - '0')*10 + arrT[4] - '0';
-    return hours*60 + minutes;
-}
+// int hrToMin(char * arrT){
+//     int hours = (arrT[0] - '0')*10 + arrT[1] - '0';
+//     int minutes = (arrT[3] - '0')*10 + arrT[4] - '0';
+//     return hours*60 + minutes;
+// }
 
 int main(){
-    int processes = 4;
+    int n = 4;
     int processNames[] = {1,2,3,4};
     int burstTime[] = {15,30,20,10};
-    char *arrivalTime[] = {"09:00","09:10","09:15","09:30"};
-    int arrivalT[processes];
-    for(int i = 0;i<processes;i++){
-        arrivalT[i] = hrToMin(arrivalTime[i]);
-    }
-    int WT[processes],TAT[processes],completionTime[processes];
+    // char *arrivalTime[] = {"09:00","09:10","09:15","09:30"};
+    int arrivalT[] = {540,550,555,570};
+    // for(int i = 0;i<n;i++){
+    //     arrivalT[i] = hrToMin(arrivalTime[i]);
+    // }
+    int WT[n],TAT[n],completionTime[n];
     int isCompleted[] = {0,0,0,0};
-    int currTime = 0;
-    int completedTasks = 0;
-    float totalTAT = 0;
-    float totalWT = 0;
+    int currTime = 0,completedTasks = 0;
+    float totalTAT = 0,totalWT = 0;
     
-    while(completedTasks<processes){
+    while(completedTasks<n){
         int minBT = 9999;
         int shortestTask = -1;
-        for(int i = 0;i<processes;i++){
+        for(int i = 0;i<n;i++){
             if(arrivalT[i] <= currTime && isCompleted[i] == 0){
                 if(burstTime[i] < minBT){
                     minBT = burstTime[i];
@@ -58,10 +56,10 @@ int main(){
         completedTasks++;
     }
     printf("Process\tBurst Time\tArrival Time\tCompletion Time\tTurn Around Time\tWaiting Time\n");
-    for(int i = 0;i<processes;i++){
+    for(int i = 0;i<n;i++){
         printf("%d\t%d\t\t%d\t\t%d\t\t%d\t\t\t%d\n",processNames[i],burstTime[i],arrivalT[i],completionTime[i],TAT[i],WT[i]);
     }
-    printf("Average Turn Around Time : %.2f\n",totalTAT/processes);
-    printf("Average Waiting Time : %.2f\n",totalWT/processes);
+    printf("Average Turn Around Time : %.2f mins\n",totalTAT/n);
+    printf("Average Waiting Time : %.2f mins\n",totalWT/n);
     return 0;
 }
