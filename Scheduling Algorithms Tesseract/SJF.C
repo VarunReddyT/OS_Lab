@@ -52,7 +52,7 @@ int main(){
     int completionTime[n],waitingTime[n],TAT[n],WT[n];
     int cumulativeSum = 1;
     float totalTat = 0, totalWt = 0;
-    printf("ProcessName Arrivaltime Bursttime  WaitingTime TurnaroundTime\n");
+    printf("ProcessName arrivaltime bursttime  waitingtime turnaroundtime\n");
     for(int i = 0;i<n;i++){
         cumulativeSum += burstTime[i];
         completionTime[i] = cumulativeSum;
