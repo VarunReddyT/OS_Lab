@@ -12,26 +12,24 @@ Your task as a developer is to  help the students to carry their tasks by using 
 
 #include<stdio.h>
 
-int hrToMin(char* arrT){
-    int hours = (arrT[0]-'0')*10 + arrT[1]-'0';
-    int minutes = (arrT[3]-'0')*10 + arrT[4]-'0';
-    return hours*60 + minutes;
-}
+// int hrToMin(char* arrT){
+//     int hours = (arrT[0]-'0')*10 + arrT[1]-'0';
+//     int minutes = (arrT[3]-'0')*10 + arrT[4]-'0';
+//     return hours*60 + minutes;
+// }
 int main(){
-    int processes = 4;
+    int n = 4;
     int burstTime[] = {15,40,25,30};
-    char* arrivalTime[] = {"08:30","08:40","08:50","09:00"};
-    int arrivalT[processes];
-    for(int i = 0;i<processes;i++){
-        arrivalT[i] = hrToMin(arrivalTime[i]);
-    }
-    int completionTime[processes];
-    int TAT[processes],WT[processes];
+    // char* arrivalTime[] = {"08:30","08:40","08:50","09:00"};
+    int arrivalT[] = {510,520,530,540};
+    // for(int i = 0;i<n;i++){
+    //     arrivalT[i] = hrToMin(arrivalTime[i]);
+    // }
+    int completionTime[n],TAT[n],WT[n];
     int cumulativeSum = arrivalT[0];
-    float totalTat = 0;
-    float totalWt = 0;
+    float totalTat = 0, totalWt = 0;
     printf("PID\tBT\tAT\tCT\tTAT\tWT\n");
-    for(int i = 0;i<processes;i++){
+    for(int i = 0;i<n;i++){
         cumulativeSum += burstTime[i];
         completionTime[i] = cumulativeSum;
         TAT[i] = completionTime[i] - arrivalT[i];
@@ -40,8 +38,8 @@ int main(){
         totalWt += WT[i];
         printf("%d\t%d\t%d\t%d\t%d\t%d\n",i+1,burstTime[i],arrivalT[i],completionTime[i],TAT[i],WT[i]);
     }
-    printf("Average Turn Around Time : %f\n",totalTat/processes);
-    printf("Average Waiting Time : %f\n",totalWt/processes);
+    printf("Average Turn Around Time : %f mins\n",totalTat/n);
+    printf("Average Waiting Time : %f mins\n",totalWt/n);
     
     
     return 0;
