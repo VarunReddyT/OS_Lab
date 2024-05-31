@@ -25,7 +25,7 @@ int main() {
     int WT[n], TAT[n], completionTime[n];
     float totalWT = 0, totalTAT = 0;
 
-    int currentTime = 0,completedTasks = 0;
+    int currTime = 0,completedTasks = 0;
     int isCompleted[] = {0,0,0,0,0};
 
 
@@ -34,7 +34,7 @@ int main() {
         int shortestTime = 99999;
 
         for (int i = 0; i < n; i++) {
-            if (isCompleted[i] == 0 && arrivalTime[i] <= currentTime && remainingTime[i] < shortestTime) {
+            if (isCompleted[i] == 0 && arrivalTime[i] <= currTime && remainingTime[i] < shortestTime) {
                 shortestTime = remainingTime[i];
                 shortestProcess = i;
             }
@@ -43,7 +43,7 @@ int main() {
         if (shortestProcess != -1) {
             remainingTime[shortestProcess]--;
             if (remainingTime[shortestProcess] == 0) {
-                completionTime[shortestProcess] = currentTime + 1;
+                completionTime[shortestProcess] = currTime + 1;
                 TAT[shortestProcess] = completionTime[shortestProcess] - arrivalTime[shortestProcess];
                 WT[shortestProcess] = TAT[shortestProcess] - burstTime[shortestProcess];
                 totalTAT += TAT[shortestProcess];
@@ -52,13 +52,13 @@ int main() {
                 completedTasks++;
             }
         }
-        currentTime++;
+        currTime++;
     }
 
 
-    printf("Process\tBurst Time\tArrival Time\tCT\tTAT\tWT\n");
+    printf("Process\tBT\tAT\tCT\tTAT\tWT\n");
     for (int i = 0; i < n; i++) {
-        printf("%d\t%d\t\t%d\t\t%d\t%d\t%d\n", processNames[i], burstTime[i], arrivalTime[i], completionTime[i],TAT[i], WT[i]);
+        printf("%d\t%d\t%d\t%d\t%d\t%d\n", processNames[i], burstTime[i], arrivalTime[i], completionTime[i],TAT[i], WT[i]);
     }
 
     printf("Average Turnaround Time: %.2f mins\n", totalTAT / n);
