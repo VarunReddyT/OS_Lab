@@ -13,53 +13,53 @@
 #include<stdio.h>
 
 int main(){
-    int processes = 5;
+    int n = 5;
     int processNames[] = {1,2,3,4,5};
     int arrivalTime[] = {3,0,4,1,5};
     int burstTime[] = {5,10,7,8,6};
     int remainingTime[] = {5,10,7,8,6};
     int priority[] = {1,2,3,4,5};
-    int TAT[processes],WT[processes],completionTime[processes];
+    int TAT[n],WT[n],completionTime[n];
     float totalTat = 0, totalWt = 0;
-    int currentTime = 0;
+    int currTime = 0;
     
-    for(int i = 0;i<processes;i++){
-        int highestPriority = 20;
-        int highestPrIndex = -1;
+    for(int i = 0;i<n;i++){
+        int hPriority = 20;
+        int index = -1;
         
-        for(int j = 0;j<processes;j++){
-            if(arrivalTime[j] <= currentTime && remainingTime[j] > 0 && priority[j]<highestPriority){
-                highestPriority = priority[j];
-                highestPrIndex = j;
+        for(int j = 0;j<n;j++){
+            if(arrivalTime[j] <= currTime && remainingTime[j] > 0 && priority[j]<hPriority){
+                hPriority = priority[j];
+                index = j;
             }
         }
         
-        if(highestPrIndex == -1){
-            currentTime++;
+        if(index == -1){
+            currTime++;
             i--;
             continue;
         }
         
-        while(remainingTime[highestPrIndex]>0){
-            remainingTime[highestPrIndex]--;
-            currentTime++;
+        while(remainingTime[index]>0){
+            remainingTime[index]--;
+            currTime++;
         }
         
-        completionTime[highestPrIndex] = currentTime;
-        TAT[highestPrIndex] = completionTime[highestPrIndex] - arrivalTime[highestPrIndex];
-        WT[highestPrIndex] = TAT[highestPrIndex] - burstTime[highestPrIndex];
+        completionTime[index] = currTime;
+        TAT[index] = completionTime[index] - arrivalTime[index];
+        WT[index] = TAT[index] - burstTime[index];
         
-        totalTat += TAT[highestPrIndex];
-        totalWt += WT[highestPrIndex];
+        totalTat += TAT[index];
+        totalWt += WT[index];
     }
     
-    printf("Process\tPriority\tBurst Time\tArrival Time\tCompletion Time\tTurnaround Time\tWaiting Time\n");
-    for(int i = 0;i<processes;i++){
-        printf("%d\t%d\t\t%d\t\t%d\t\t%d\t\t%d\t\t\t%d\n",processNames[i],priority[i],burstTime[i],arrivalTime[i],completionTime[i],TAT[i],WT[i]);
+    printf("Process\tPriority\tBT\tAT\tCT\tTAT\tWT\n");
+    for(int i = 0;i<n;i++){
+        printf("%d\t%d\t\t%d\t%d\t%d\t%d\t%d\n",processNames[i],priority[i],burstTime[i],arrivalTime[i],completionTime[i],TAT[i],WT[i]);
     }
     
-    printf("Average Turn Around Time : %.2f\n",totalTat/processes);
-    printf("Average Waiting Time : %.2f\n",totalWt/processes);
+    printf("Average Turn Around Time : %.2f mins\n",totalTat/n);
+    printf("Average Waiting Time : %.2f mins\n",totalWt/n);
     
     return 0;
 }
