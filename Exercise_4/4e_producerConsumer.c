@@ -29,8 +29,8 @@ int main()
               
             
             sem_wait(semProducer);
-            printf("Producing Item : %d\n",i);
-            sem_post(semConsumer);/* code */
+            printf("Producing Item\n");
+            sem_post(semConsumer);
             sleep(2);
 
         }
@@ -46,7 +46,7 @@ int main()
         for (int i = 0; i < 5; i++)
         {   
             sem_wait(semConsumer);
-            printf("Consuming item : %d\n",i);
+            printf("Consuming item\n");
             sem_post(semProducer);
             sleep(2);
           
