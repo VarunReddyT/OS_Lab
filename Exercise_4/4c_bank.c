@@ -10,7 +10,6 @@ void deposit(int *balance , int amount){
     *balance += amount;
     printf("Depositing %d to account\n",amount);
     printf("New balance after withdrawal: %d\n",*balance);
-
 }
 
 void withdraw(int * balance , int amount){
@@ -67,8 +66,6 @@ int main()
     else{
         printf("Error: fork() failed\n");
     }
-    
-
     return 0;
 }
 
