@@ -1,6 +1,4 @@
 *.exe
 *a.out
 *.vscode
-# Ignore executable files
-*
-!*.c
+
