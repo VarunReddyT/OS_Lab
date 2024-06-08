@@ -9,7 +9,7 @@
 void deposit(int *balance , int amount){
     *balance += amount;
     printf("Depositing %d to account\n",amount);
-    printf("New balance after withdrawal: %d\n",*balance);
+    printf("New balance after deposit: %d\n",*balance);
 }
 
 void withdraw(int * balance , int amount){
