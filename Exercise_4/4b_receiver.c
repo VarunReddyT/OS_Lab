@@ -11,24 +11,24 @@ struct msgbuf
 int main()
 {
     key_t key = 1234; // predefined key
-    int msgid;
+    int msg_id;
     struct msgbuf msg;
     // Access the message queue
-    msgid = msgget(key, 0666 | IPC_CREAT);
-    if (msgid < 0)
+    msg_id = msgget(key, 0666 | IPC_CREAT);
+    if (msg_id < 0)
     {
         perror("msgget");
         exit(EXIT_FAILURE);
     }
     // Receive a message of any type
-    if (msgrcv(msgid, &msg, sizeof(msg.mtext), 0, 0) < 0)
+    if (msgrcv(msg_id, &msg, sizeof(msg.mtext), 0, 0) < 0)
     {
         perror("msgrcv");
         exit(EXIT_FAILURE);
     }
     printf("Received: %s\n", msg.mtext);
     // Optionally remove the message queue
-    if (msgctl(msgid, IPC_RMID, NULL) < 0)
+    if (msgctl(msg_id, IPC_RMID, NULL) < 0)
     {
         perror("msgctl");
         exit(EXIT_FAILURE);
