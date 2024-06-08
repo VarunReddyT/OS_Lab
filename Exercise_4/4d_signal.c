@@ -16,11 +16,6 @@ int main()
     if (pid == 0)
     {
         printf("Child process is running...\n");
-        while (1)
-        {
-            printf("child is working....");
-            sleep(1);
-        }
     }
     else
     {
@@ -47,14 +42,10 @@ int main()
         {
             perror("Failed to terminate the child process");
         }
-        printf("Parent has Terminated the child\n");
-
         if (wait(NULL) == -1)
         {
             printf("failed to wait for child..");
         }
-
-        printf("Parent process is finished");
     }
 
     return 0;
