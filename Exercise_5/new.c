@@ -224,8 +224,7 @@ int main(){
         if(wantContinue != 1){
             break;
         }
-    }
-    
+    }    
     
     return 0;
 }

@@ -27,20 +27,17 @@ int main()
     sem_t mutex;
     sem_init(&mutex, 0, 1); 
 
-    // shared resource;
     int shm_fd = shm_open("/shared_balance", O_CREAT | O_RDWR, 0666);
     if (shm_fd == -1) {
         perror("Failed to create shared memory");
         exit(1);
     }
 
-    // Set size of shared memory object
     if (ftruncate(shm_fd, sizeof(int)) == -1) {
         perror("Failed to set size of shared memory");
         exit(1);
     }
 
-    // Map shared memory object
     int *initialBalance = mmap(0, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
     if (initialBalance == MAP_FAILED) {
         perror("Failed to map shared memory");
