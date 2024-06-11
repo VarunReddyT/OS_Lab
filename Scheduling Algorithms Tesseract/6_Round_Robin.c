@@ -44,7 +44,7 @@ int main()
     int burst[] = {5, 3, 1, 2, 3};
     int remTime[] = {5, 3, 1, 2, 3};
     int complete[] = {-1, -1, -1, -1, -1};
-    int TAT[n], WT[n],currTime = 0, completed = 0;
+    int TAT[n], WT[n],currTime = arrival[0], completed = 0;
     float totalTat = 0, totalWt = 0;
 
     // Ready queue

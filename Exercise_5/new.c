@@ -188,7 +188,7 @@ int main(){
         if(flag == false){
             continue;
         }
-        // we are just pretending to allocate the resources to the process
+
         for(int i = 0; i < resources; i++){
             available[i] -= request[i];
             allocated[process_id][i] += request[i];
@@ -198,7 +198,7 @@ int main(){
         
         if(!safe){
             printf("process %d request cannot be granted immediately\n",process_id);
-            // After checking the safe state we are reverting the changes
+
          for(int i = 0; i < resources; i++){
             available[i] += request[i];
             allocated[process_id][i] -= request[i];

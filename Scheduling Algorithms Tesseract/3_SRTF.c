@@ -25,7 +25,7 @@ int main() {
     int WT[n], TAT[n], completionTime[n];
     float totalWT = 0, totalTAT = 0;
 
-    int currTime = 0,completedTasks = 0;
+    int currTime = arrivalTime[0],completedTasks = 0;
     int isCompleted[] = {0,0,0,0,0};
 
 

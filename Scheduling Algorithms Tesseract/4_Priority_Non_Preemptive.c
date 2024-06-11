@@ -21,7 +21,7 @@ int main(){
     int priority[] = {1,2,3,4,5};
     int TAT[n],WT[n],completionTime[n];
     float totalTat = 0, totalWt = 0;
-    int currTime = 0;
+    int currTime = arrivalTime[0];
     
     for(int i = 0;i<n;i++){
         int hPriority = 20;

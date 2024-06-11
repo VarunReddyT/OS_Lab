@@ -23,7 +23,7 @@ int main(){
     int remaining[] = {1,7,3,6,5,15,8};
     int completionTime[n],TAT[n],WT[n];
     float totalTat = 0, totalWt = 0;
-    int currTime = 0,completed = 0;
+    int currTime = arrivalTime[0],completed = 0;
     
     while(completed < n){
         int hPriority = -1;
