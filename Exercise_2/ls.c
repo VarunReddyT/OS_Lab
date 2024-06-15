@@ -1,25 +1,17 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <stdlib.h>
-int main()
-{
-    int pid;      // process id
-    pid = fork(); // create another process
-    if (pid < 0)
-    {
-        printf("\nFork failed\n");
-        exit(-1);
+#include<stdio.h>
+#include<dirent.h>   // directory manipulation functions.
+
+int main(){
+    DIR * dir = opendir(".");      //  If successful, opendir returns a pointer to a DIR structure representing the directory, which is assigned to dir. If it fails, it returns NULL.
+    if(dir == NULL){
+        printf("Error opening directory");
+        return 1;
     }
-    else if (pid == 0)
-    {
-        // child
-        execlp("/bin/ls", "ls", "-l", NULL); // execute ls
+
+    struct dirent * entry;    // declares a pointer to a struct dirent, which represents a directory entry. It will be used to store information about each directory entry as we traverse the directory.
+    while((entry = readdir(dir))!=NULL){
+        printf("%s\n",entry->d_name);
     }
-    else
-    {               // parent
-        wait(NULL); // wait for child
-        printf("\nchild complete\n");
-        exit(0);
-    }
+    closedir(dir);
+    return 0;
 }
