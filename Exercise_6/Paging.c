@@ -1,9 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #define PAGE_SIZE 1024
 #define NUM_PAGES 32
 #define MEMORY_SIZE (PAGE_SIZE * NUM_PAGES)
+
+
 char physical_memory[MEMORY_SIZE];
+
+
 void initialize_memory()
 {
     for (int i = 0; i < MEMORY_SIZE; ++i)
@@ -11,6 +16,7 @@ void initialize_memory()
         physical_memory[i] = 0;
     }
 }
+
 void page_fault(int page_number)
 {
     printf("Page fault occurred for page %d\n", page_number);
@@ -20,6 +26,7 @@ void page_fault(int page_number)
         physical_memory[i] = page_number + 1;
     }
 }
+
 void access_memory(int address)
 {
     int page_number = address / PAGE_SIZE;
@@ -30,6 +37,7 @@ void access_memory(int address)
     }
     printf("Accessing memory location %d: Value = %d\n", address, physical_memory[address]);
 }
+
 int main()
 {
     initialize_memory();
