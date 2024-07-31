@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
         printf("FILE PROPERTIES \n");
         printf("Inode number:%d\n", a.st_ino);
         printf("No of links:%d\n", a.st_nlink);
-        printf("Last access time:%s", asctime(localtime(&a.st_atime)));
+        printf("Last access time:%s", ctime(&a.st_atime));
         printf("Permission Flag:%o\n", a.st_mode % 512);
         printf("Size:%d\n", a.st_size);
     }
