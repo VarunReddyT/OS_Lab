@@ -8,7 +8,6 @@ int main(int argc, char *argv[])
 {
     DIR *dir;
     struct dirent *entry;
-    struct stat file_stat;
     if (argc < 2)
     {
         dir = opendir(".");
