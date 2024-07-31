@@ -30,8 +30,8 @@ void page_fault(int page_number)
 void access_memory(int address)
 {
     int page_number = address / PAGE_SIZE;
-    int offset = address % PAGE_SIZE;
-    if (physical_memory[page_number * PAGE_SIZE] == 0)
+    // int offset = address % PAGE_SIZE;
+    if (physical_memory[address] == 0)
     {
         page_fault(page_number);
     }
